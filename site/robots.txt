@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://daepohang-fish.netlify.app/sitemap.xml
