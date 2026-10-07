@@ -1,3 +1,5 @@
+# 호스팅은 Cloudflare Pages로 옮겼어요. Netlify가 빌드하지 않도록 항상 건너뜁니다.
 [build]
   publish = "site"
   command = ""
+  ignore = "exit 0"
