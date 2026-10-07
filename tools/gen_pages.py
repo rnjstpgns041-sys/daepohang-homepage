@@ -2,7 +2,7 @@ import json, os, sys
 
 ROOT = sys.argv[1]
 BASE = "https://daepohang-fish.pages.dev"
-NAVER_TAG = '<meta name="naver-site-verification" content="a98f7cb6e0df917fced0f96516ebefca9ab91acb">'
+NAVER_TAG = '<meta name="naver-site-verification" content="8dd3b14817dc29fab7d6907ab8e6febcf467bf17">'
 ADDR = "강원특별자치도 속초시 대포항길 10"
 PHONE = "0507-1364-4060"
 
