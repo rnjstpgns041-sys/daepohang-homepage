@@ -63,6 +63,11 @@ article li{margin:4px 0}
 .glist a:hover,.glist a:focus-visible{border-color:var(--chili)}
 .glist b{font-size:1.02rem}
 .glist span{color:var(--muted);font-size:.88rem;line-height:1.5}
+.copybtn{margin-left:6px;padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--ink);font:inherit;font-size:.82rem;cursor:pointer;vertical-align:1px}
+.copybtn:hover{border-color:var(--chili)}
+.copybtn:focus-visible{outline:3px solid var(--sesame);outline-offset:2px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:999px;font-weight:700;font-size:.95rem;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:50;max-width:calc(100% - 32px);width:max-content;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
 footer{padding-block:28px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
 """
 
@@ -245,9 +250,9 @@ def page(p):
   <section class="info" aria-label="매장 정보">
     <h2>대포항생선찜본점</h2>
     <dl>
-      <dt>주소</dt><dd>{ADDR}</dd>
+      <dt>주소</dt><dd><span class="cv">{ADDR}</span> <button class="copybtn" type="button" data-copy="{ADDR}" data-label="주소">복사</button></dd>
       <dt>영업</dt><dd>10:00 ~ 21:00 · 매주 수요일 휴무</dd>
-      <dt>전화</dt><dd>{PHONE}</dd>
+      <dt>전화</dt><dd><span class="cv">{PHONE}</span> <button class="copybtn" type="button" data-copy="{PHONE}" data-label="전화번호">복사</button></dd>
       <dt>주차</dt><dd>대포항 공영주차장</dd>
     </dl>
     <div class="cta">
@@ -268,6 +273,7 @@ def page(p):
   </nav>
 </main>
 <footer><div class="wrap">대포항생선찜본점 · {ADDR} · {PHONE}</div></footer>
+<script src="/js/copy.js" defer></script>
 </body>
 </html>
 """
