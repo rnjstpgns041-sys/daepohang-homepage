@@ -227,6 +227,12 @@ def page(p):
 <meta property="og:description" content="{p['desc']}">
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="{BASE}/img/{p['img']}">
+<meta property="og:site_name" content="대포항생선찜본점">
+<meta property="og:locale" content="ko_KR">
+<meta name="application-name" content="대포항생선찜본점">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700&display=swap">
@@ -340,7 +346,8 @@ if 'id="guide"' not in s or True:
 .guide span{color:var(--muted);font-size:.92rem}
 </style>"""
     s = s.replace("</style>", css, 1)
-    s = s.replace("</head>", jsonld(PAGES[1]).split("\n")[0].replace(PAGES[1]["img"],"gaori-jjim.jpg")+"\n</head>",1)
+    site_ld = '<script type="application/ld+json">'+json.dumps({"@context":"https://schema.org","@type":"WebSite","name":"대포항생선찜본점","alternateName":["대포항 생선찜","속초 대포항생선찜"],"url":BASE+"/"},ensure_ascii=False)+'</script>'
+    s = s.replace("</head>", jsonld(PAGES[1]).split("\n")[0].replace(PAGES[1]["img"],"gaori-jjim.jpg")+"\n"+site_ld+"\n</head>",1)
     s = s.replace('<meta name="description" content="속초 대포항 생선찜·생선구이 전문점.','<meta name="description" content="속초 대포항 맛집 대포항생선찜본점. 생선찜·생선구이 전문점.',1)
     open(hp,"w",encoding="utf-8").write(s)
 print("ok", urls)
