@@ -2,6 +2,7 @@ import json, os, sys
 
 ROOT = sys.argv[1]
 BASE = "https://daepohang-fish.pages.dev"
+INSTA = "https://www.instagram.com/_crab.ggo"
 NAVER_TAG = '<meta name="naver-site-verification" content="8dd3b14817dc29fab7d6907ab8e6febcf467bf17">'
 ADDR = "강원특별자치도 속초시 대포항길 10"
 PHONE = "0507-1364-4060"
@@ -196,7 +197,7 @@ PAGES = [
 def jsonld(p):
     data = {
       "@context":"https://schema.org","@type":"Restaurant","name":"대포항생선찜본점",
-      "url":BASE+"/","telephone":PHONE,"image":BASE+"/img/"+p["img"],
+      "url":BASE+"/","telephone":PHONE,"sameAs":[INSTA],"image":BASE+"/img/"+p["img"],
       "servesCuisine":["생선찜","생선구이","오징어순대"],
       "address":{"@type":"PostalAddress","streetAddress":"대포항길 10","addressLocality":"속초시","addressRegion":"강원특별자치도","addressCountry":"KR"},
       "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Thursday","Friday","Saturday","Sunday"],"opens":"10:00","closes":"21:00"}]}
@@ -272,7 +273,7 @@ def page(p):
     </ul>
   </nav>
 </main>
-<footer><div class="wrap">대포항생선찜본점 · {ADDR} · {PHONE}</div></footer>
+<footer><div class="wrap">대포항생선찜본점 · {ADDR} · {PHONE} · <a href="{INSTA}" target="_blank" rel="noopener">인스타그램</a></div></footer>
 <script src="/js/copy.js" defer></script>
 </body>
 </html>
