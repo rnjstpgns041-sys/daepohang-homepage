@@ -299,6 +299,9 @@ def page(p):
 # ---- extra pages ----
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from pages2 import P as EXTRA
+from pages3 import P as EXTRA3
+NEW = {e['slug'] for e in EXTRA3}
+EXTRA = EXTRA + EXTRA3
 for p in PAGES: p.setdefault("cat","대표")
 for e in EXTRA:
     body = "".join(f"\n<h2>{h}</h2>\n{html}" for h,html in e["sections"])
@@ -328,7 +331,7 @@ html=page(gp).replace('<nav class="more"','<nav hidden class="more"')
 open(os.path.join(ROOT,"guide","index.html"),"w",encoding="utf-8").write(html)
 urls = [BASE+"/", BASE+"/guide/"] + [f"{BASE}/{p['slug']}/" for p in PAGES]
 sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + \
-     "".join(f"  <url><loc>{u}</loc><lastmod>2026-10-06</lastmod></url>\n" for u in urls) + "</urlset>\n"
+     "".join(f"  <url><loc>{u}</loc><lastmod>{'2026-10-11' if u.rstrip('/').rsplit('/',1)[-1] in NEW else '2026-10-06'}</lastmod></url>\n" for u in urls) + "</urlset>\n"
 open(os.path.join(ROOT,"sitemap.xml"),"w",encoding="utf-8").write(sm)
 
 # home: add keyword links section + restaurant JSON-LD
@@ -339,7 +342,7 @@ if 'id="guide"' not in s or True:
     s=re.sub(r'\.guide\{.*?\.guide span\{[^}]*\}\n','',s,flags=re.S)
     s=re.sub(r'<script type="application/ld\+json">.*?</script>\n','',s,flags=re.S)
     s=s.replace('<meta name="description" content="속초 대포항 맛집 대포항생선찜본점. 생선찜·생선구이 전문점.','<meta name="description" content="속초 대포항 생선찜·생선구이 전문점.')
-    links = "\n".join(f'        <a href="/{p["slug"]}/"><b>{p["short"]}</b><span>{p["lede"]}</span></a>' for p in PAGES[:5]) + '\n        <a href="/guide/"><b>전체 안내 보기</b><span>메뉴, 대포항 주변, 상황별 식사, 여행 코스 48가지</span></a>'
+    links = "\n".join(f'        <a href="/{p["slug"]}/"><b>{p["short"]}</b><span>{p["lede"]}</span></a>' for p in PAGES[:5]) + f'\n        <a href="/guide/"><b>전체 안내 보기</b><span>메뉴, 대포항 주변, 상황별 식사, 여행 코스 {len(PAGES)}가지</span></a>'
     block = f"""  <section id="guide" class="alt">
     <div class="wrap">
       <div class="sec-head"><div><p class="eyebrow">더 알아보기</p><h2>메뉴와 여행 안내</h2></div></div>
