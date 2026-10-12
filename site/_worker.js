@@ -1,5 +1,5 @@
-// Owner-only summary. Requires header x-stats-key equal to the STATS_KEY secret.
-// Shared D1 setup for the visit/call tracker. Needs a D1 binding named DB.
+// 사장님 전용 통계: 방문·버튼 기록(/api/t)과 요약(/api/stats). 나머지 요청은 정적 파일로 넘깁니다.
+// D1 바인딩 이름 DB, 비밀번호 비밀값 STATS_KEY 가 필요합니다.
 async function ensure(db) {
   await db.prepare(`CREATE TABLE IF NOT EXISTS events (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -8,10 +8,29 @@ async function ensure(db) {
   await db.prepare("CREATE INDEX IF NOT EXISTS events_day ON events(day)").run();
 }
 
+const TYPES = new Set(["view", "call", "map", "menu", "copy_phone", "copy_addr"]);
+const cut = (v, n) => (typeof v === "string" ? v.slice(0, n) : "");
+
+async function track(request, env) {
+  if (!env.DB) return new Response(null, { status: 204 });
+  let b;
+  try { b = JSON.parse(await request.text()); } catch { return new Response(null, { status: 400 }); }
+  if (!TYPES.has(b.t)) return new Response(null, { status: 400 });
+  const ua = request.headers.get("user-agent") || "";
+  if (/bot|crawl|spider|yeti|daum|preview/i.test(ua)) return new Response(null, { status: 204 });
+  const dev = /mobi|android|iphone/i.test(ua) ? "모바일" : "PC";
+  const now = Date.now();
+  const day = new Date(now + 9 * 3600e3).toISOString().slice(0, 10); // 한국 날짜
+  await ensure(env.DB);
+  await env.DB.prepare("INSERT INTO events (ts,day,type,path,landing,src,q,dev) VALUES (?,?,?,?,?,?,?,?)")
+    .bind(now, day, b.t, cut(b.p, 200), cut(b.l, 200), cut(b.s, 40), cut(b.q, 100), dev).run();
+  return new Response(null, { status: 204 });
+}
+
 const json = (o, status = 200) => new Response(JSON.stringify(o), {
   status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } });
 
-export async function onRequestGet({ request, env }) {
+async function stats(request, env) {
   if (!env.DB || !env.STATS_KEY) return json({ error: "setup" }, 503);
   if (request.headers.get("x-stats-key") !== env.STATS_KEY) return json({ error: "key" }, 401);
   const days = Math.min(Math.max(parseInt(new URL(request.url).searchParams.get("days") || "30", 10) || 30, 1), 3650);
@@ -29,3 +48,12 @@ export async function onRequestGet({ request, env }) {
   ]);
   return json({ from, days, total: total[0], daily, pages, sources, queries, devices });
 }
+
+export default {
+  async fetch(request, env) {
+    const { pathname } = new URL(request.url);
+    if (pathname === "/api/t" && request.method === "POST") return track(request, env);
+    if (pathname === "/api/stats" && request.method === "GET") return stats(request, env);
+    return env.ASSETS.fetch(request);
+  },
+};
