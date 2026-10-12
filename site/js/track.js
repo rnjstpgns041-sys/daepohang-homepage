@@ -22,7 +22,9 @@
     } catch (e) {}
     set("dp-landing", path); set("dp-src", src); set("dp-q", q);
   }
+  var GA = { call: "phone_click", map: "map_click", menu: "menu_click", copy_phone: "phone_copy", copy_addr: "address_copy" };
   function send(t) {
+    if (t !== "view" && window.gtag) window.gtag("event", GA[t] || t, { landing_page: get("dp-landing"), traffic_from: get("dp-src") });
     var body = JSON.stringify({ t: t, p: path, l: get("dp-landing"), s: get("dp-src"), q: t === "view" ? get("dp-q") : "" });
     if (navigator.sendBeacon) navigator.sendBeacon("/api/t", body);
     else fetch("/api/t", { method: "POST", body: body, keepalive: true });

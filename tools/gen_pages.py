@@ -292,6 +292,8 @@ def page(p):
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LD5ZT3JK2H"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag("js",new Date());gtag("config","G-LD5ZT3JK2H");</script>
 {NAVER_TAG}
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{p['title']}</title>
