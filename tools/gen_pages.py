@@ -2,7 +2,7 @@ import json, os, sys
 
 ROOT = sys.argv[1]
 BASE = "https://daepohang-fish.pages.dev"
-INSTA = "https://www.instagram.com/_crab.ggo"
+INSTA = "https://www.instagram.com/jjimmy_1"
 NAVER_TAG = '<meta name="naver-site-verification" content="8dd3b14817dc29fab7d6907ab8e6febcf467bf17">'
 ADDR = "강원특별자치도 속초시 대포항길 10"
 PHONE = "0507-1364-4060"
@@ -304,8 +304,10 @@ def page(p):
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from pages2 import P as EXTRA
 from pages3 import P as EXTRA3
+from pages4 import P as EXTRA4
 NEW = {e['slug'] for e in EXTRA3}
-EXTRA = EXTRA + EXTRA3
+NEW4 = {e['slug'] for e in EXTRA4}
+EXTRA = EXTRA + EXTRA3 + EXTRA4
 for p in PAGES: p.setdefault("cat","대표")
 for e in EXTRA:
     body = "".join(f"\n<h2>{h}</h2>\n{html}" for h,html in e["sections"])
@@ -335,7 +337,7 @@ html=page(gp).replace('<nav class="more"','<nav hidden class="more"')
 open(os.path.join(ROOT,"guide","index.html"),"w",encoding="utf-8").write(html)
 urls = [BASE+"/", BASE+"/guide/"] + [f"{BASE}/{p['slug']}/" for p in PAGES]
 sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + \
-     "".join(f"  <url><loc>{u}</loc><lastmod>{'2026-10-11' if u.rstrip('/').rsplit('/',1)[-1] in NEW else '2026-10-06'}</lastmod></url>\n" for u in urls) + "</urlset>\n"
+     "".join(f"  <url><loc>{u}</loc><lastmod>{'2026-10-12' if u.rstrip('/').rsplit('/',1)[-1] in NEW4 else '2026-10-11' if u.rstrip('/').rsplit('/',1)[-1] in NEW else '2026-10-06'}</lastmod></url>\n" for u in urls) + "</urlset>\n"
 open(os.path.join(ROOT,"sitemap.xml"),"w",encoding="utf-8").write(sm)
 
 # home: add keyword links section + restaurant JSON-LD
