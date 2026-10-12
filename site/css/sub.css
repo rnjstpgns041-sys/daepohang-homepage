@@ -70,4 +70,29 @@ body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
 @media (min-width:900px){.dock{left:auto;right:24px;bottom:24px;width:420px;border:1px solid var(--line);box-shadow:0 12px 30px -16px rgba(40,30,20,.5)}body{padding-bottom:0}}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 @media (prefers-reduced-motion:reduce){.toast{transition:none}}
+.taste{margin:34px 0 0}
+.taste-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.taste h2{font-size:clamp(1.4rem,4vw,1.8rem)}
+.taste-head p{margin:0;color:var(--muted);font-size:.9rem}
+@media (min-width:641px){.taste-head p{display:none}}
+.dishes{list-style:none;padding:0;margin:16px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.dishes a{display:flex;flex-direction:column;height:100%;background:var(--surface);border:1px solid var(--line);text-decoration:none;min-width:0}
+.dishes a:hover,.dishes a:focus-visible{border-color:var(--chili)}
+.dishes img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.dishes .d{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
+.dishes b{font-family:var(--display);font-weight:800;font-size:1.12rem}
+.dishes .sig{align-self:flex-start;font-size:.72rem;font-weight:700;letter-spacing:.06em;color:#fff;background:var(--chili);padding:1px 8px}
+.dishes span.t{color:var(--muted);font-size:.9rem;line-height:1.55}
+.dishes span.p{margin-top:auto;padding-top:6px;font-weight:700;font-size:.88rem;color:var(--sea)}
+@media (max-width:640px){.dishes{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:20px;margin-inline:-20px;padding-inline:20px;gap:12px;scrollbar-width:none}
+ .dishes::-webkit-scrollbar{display:none}.dishes li{flex:0 0 72%;scroll-snap-align:start}}
+.plate{margin-top:52px;padding-top:22px;border-top:1px solid var(--line)}
+article .plate h2{margin:0;padding:0;border:0}
+.plate .two figcaption{font-size:.88rem;color:var(--muted);padding-top:6px}
+.hungry{margin-top:40px;background:var(--chili);color:#fff;padding:26px 24px;text-align:center}
+article .hungry h2{margin:0;padding:0;border:0;font-size:clamp(1.35rem,4vw,1.7rem)}
+.hungry p{margin:10px auto 0;max-width:520px;opacity:.95}
+.hungry .cta{justify-content:center}
+.hungry .btn-primary{color:var(--chili)}
+.hungry .btn-line{color:#fff}
 footer{padding-block:30px;color:var(--muted);font-size:.86rem;border-top:1px solid var(--line);text-align:center}

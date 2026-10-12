@@ -79,6 +79,31 @@ body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
 @media (min-width:900px){.dock{left:auto;right:24px;bottom:24px;width:420px;border:1px solid var(--line);box-shadow:0 12px 30px -16px rgba(40,30,20,.5)}body{padding-bottom:0}}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 @media (prefers-reduced-motion:reduce){.toast{transition:none}}
+.taste{margin:34px 0 0}
+.taste-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.taste h2{font-size:clamp(1.4rem,4vw,1.8rem)}
+.taste-head p{margin:0;color:var(--muted);font-size:.9rem}
+@media (min-width:641px){.taste-head p{display:none}}
+.dishes{list-style:none;padding:0;margin:16px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.dishes a{display:flex;flex-direction:column;height:100%;background:var(--surface);border:1px solid var(--line);text-decoration:none;min-width:0}
+.dishes a:hover,.dishes a:focus-visible{border-color:var(--chili)}
+.dishes img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.dishes .d{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
+.dishes b{font-family:var(--display);font-weight:800;font-size:1.12rem}
+.dishes .sig{align-self:flex-start;font-size:.72rem;font-weight:700;letter-spacing:.06em;color:#fff;background:var(--chili);padding:1px 8px}
+.dishes span.t{color:var(--muted);font-size:.9rem;line-height:1.55}
+.dishes span.p{margin-top:auto;padding-top:6px;font-weight:700;font-size:.88rem;color:var(--sea)}
+@media (max-width:640px){.dishes{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:20px;margin-inline:-20px;padding-inline:20px;gap:12px;scrollbar-width:none}
+ .dishes::-webkit-scrollbar{display:none}.dishes li{flex:0 0 72%;scroll-snap-align:start}}
+.plate{margin-top:52px;padding-top:22px;border-top:1px solid var(--line)}
+article .plate h2{margin:0;padding:0;border:0}
+.plate .two figcaption{font-size:.88rem;color:var(--muted);padding-top:6px}
+.hungry{margin-top:40px;background:var(--chili);color:#fff;padding:26px 24px;text-align:center}
+article .hungry h2{margin:0;padding:0;border:0;font-size:clamp(1.35rem,4vw,1.7rem)}
+.hungry p{margin:10px auto 0;max-width:520px;opacity:.95}
+.hungry .cta{justify-content:center}
+.hungry .btn-primary{color:var(--chili)}
+.hungry .btn-line{color:#fff}
 footer{padding-block:30px;color:var(--muted);font-size:.86rem;border-top:1px solid var(--line);text-align:center}
 """
 
@@ -215,6 +240,47 @@ def jsonld(p):
     return ('<script type="application/ld+json">'+json.dumps(data,ensure_ascii=False)+'</script>\n'
             '<script type="application/ld+json">'+json.dumps(faq,ensure_ascii=False)+'</script>')
 
+DISHES = [
+  ("sokcho-gaori-jjim","가오리찜","gaori-jjim.jpg","쫄깃한 살에 오도독 연골. 매콤달콤 양념이 무까지 푹 배었어요.","소 2인 · 중 3인 · 대 4인"),
+  ("sokcho-saengseon-modeum-jjim","생선모듬찜","jjim-table.jpg","여러 생선을 한 냄비에. 자작한 양념에 밥 한 공기가 금방 비어요.","소 2인 · 중 3인 · 대 4인"),
+  ("sokcho-saengseon-gui","모듬생선구이","gui.jpg","껍질은 바삭, 살은 촉촉. 맵지 않아 아이도 잘 먹어요.","맵지 않은 메뉴"),
+  ("sokcho-nurungji-squid-sundae","누룽지 오징어순대","squid-sundae.jpg","겉은 누룽지처럼 바삭, 속은 쫄깃. 한 점이면 손이 또 가요.","17,000원"),
+  ("sokcho-daegu-ppol-jjim","대구뽈찜","jjim-closeup.jpg","쫀득한 볼살과 껍질을 골라 먹는 재미. 아는 분들이 찾는 맛.","소 2인 · 중 3인 · 대 4인"),
+  ("sokcho-abai-sundae","속초아바이순대","abai-sundae.jpg","찹쌀과 선지로 속을 꽉 채운 굵은 순대. 든든하고 고소해요.","찜과 곁들이기 좋아요"),
+]
+def taste(p):
+    import zlib
+    rest = DISHES[1:]
+    k = zlib.crc32(p["slug"].encode()) % len(rest)
+    pick = [DISHES[0]] + [rest[(k+i) % len(rest)] for i in range(2)]
+    cards = "\n".join(
+        f'    <li><a href="/{s}/"><img src="/img/{img}" alt="대포항생선찜본점 {n}" loading="lazy">'
+        f'<span class="d">{"<span class=sig>대표 메뉴</span>" if i==0 else ""}<b>{n}</b><span class="t">{t}</span><span class="p">{pr}</span></span></a></li>'
+        for i,(s,n,img,t,pr) in enumerate(pick))
+    return f"""  <section class="taste" aria-label="대표 메뉴">
+    <div class="taste-head"><h2>오늘 이 한 상, 어떠세요?</h2><p>옆으로 넘겨 보세요</p></div>
+    <ul class="dishes">
+{cards}
+    </ul>
+  </section>"""
+
+PLATE = """  <section class="plate" aria-label="이렇게 나와요">
+    <h2>상에 오르면 이런 모습이에요</h2>
+    <div class="two">
+      <figure><img src="/img/jjim-closeup.jpg" alt="양념이 밴 생선찜" loading="lazy"><figcaption>양념이 속까지 밴 생선살과 무</figcaption></figure>
+      <figure><img src="/img/squid-sundae2.jpg" alt="바삭하게 부친 오징어순대" loading="lazy"><figcaption>노릇하게 부쳐 낸 오징어순대</figcaption></figure>
+    </div>
+    <p>보글보글 끓는 찜 냄비를 가운데 두고, 생선살 한 점을 밥 위에 올린 다음 양념을 한 숟갈 끼얹어 보세요. 마지막엔 남은 양념에 밥을 비벼 먹는 것까지가 대포항 생선찜의 한 끼입니다.</p>
+  </section>
+  <section class="hungry" aria-label="주문 안내">
+    <h2>배고프실 때, 전화 한 통이면 돼요</h2>
+    <p>자리 문의도, 포장 주문도 전화로 바로 됩니다. 미리 주문하시면 기다리지 않고 받아 가실 수 있어요.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="tel:050713644060">전화로 주문·문의</a>
+      <a class="btn btn-line" href="https://map.naver.com/p/search/%EB%8C%80%ED%8F%AC%ED%95%AD%EC%83%9D%EC%84%A0%EC%B0%9C%EB%B3%B8%EC%A0%90" target="_blank" rel="noopener">길찾기</a>
+    </div>
+  </section>"""
+
 def page(p):
     url = f"{BASE}/{p['slug']}/"
     same=[o for o in PAGES if o is not p and o.get("cat")==p.get("cat")]
@@ -262,8 +328,10 @@ def page(p):
     <p class="lede">{p['lede']}</p>
   </div>
   <figure class="photo"><img src="/img/{p['img']}" alt="{p['alt']}"><figcaption>대포항생선찜본점 · {p['kw']}</figcaption></figure>
+{taste(p)}
   <article>
 {p['body']}
+{PLATE}
   <section class="info" aria-label="매장 정보">
     <h2>대포항생선찜본점</h2>
     <dl>
