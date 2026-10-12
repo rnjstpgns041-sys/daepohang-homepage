@@ -364,6 +364,7 @@ def page(p):
   <a href="/#menu">메뉴 보기</a>
 </nav>
 <script src="/js/copy.js" defer></script>
+<script src="/js/track.js" defer></script>
 </body>
 </html>
 """
@@ -407,6 +408,9 @@ urls = [BASE+"/", BASE+"/guide/"] + [f"{BASE}/{p['slug']}/" for p in PAGES]
 sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + \
      "".join(f"  <url><loc>{u}</loc><lastmod>{'2026-10-12' if u.rstrip('/').rsplit('/',1)[-1] in NEW4 else '2026-10-11' if u.rstrip('/').rsplit('/',1)[-1] in NEW else '2026-10-06'}</lastmod></url>\n" for u in urls) + "</urlset>\n"
 open(os.path.join(ROOT,"sitemap.xml"),"w",encoding="utf-8").write(sm)
+# page names for the owner-only stats page
+os.makedirs(os.path.join(ROOT,"stats"),exist_ok=True)
+json.dump({"/":"홈 (첫 화면)","/guide/":"전체 안내", **{f"/{p['slug']}/":p["kw"] for p in PAGES}}, open(os.path.join(ROOT,"stats","pages.json"),"w",encoding="utf-8"), ensure_ascii=False)
 
 # home: add keyword links section + restaurant JSON-LD
 hp = os.path.join(ROOT,"index.html"); s = open(hp,encoding="utf-8").read()
