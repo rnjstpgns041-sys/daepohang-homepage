@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>광고 장부 | 대포항생선찜본점</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<style>
+:root{--bg:#f2e9d8;--surface:#f7f0e2;--ink:#221d19;--muted:#5d5246;--line:#c9b996;--chili:#a3302a;--sea:#1e4a55;--field:#fffaf0;
+  --body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a1714;--surface:#24201c;--ink:#efe6d6;--muted:#b3a693;--line:#4a4136;--chili:#e0675e;--sea:#8fc3cf;--field:#1f1b18;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1a1714;--surface:#24201c;--ink:#efe6d6;--muted:#b3a693;--line:#4a4136;--chili:#e0675e;--sea:#8fc3cf;--field:#1f1b18;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6;word-break:keep-all}
+.wrap{max-width:960px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:1.5rem;margin:0}
+h1 small{display:block;font-size:.85rem;color:var(--muted);font-weight:500}
+h2{font-size:1.1rem;margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 12px;font-size:.88rem}
+.tabs{display:flex;gap:6px;margin-bottom:16px}
+.tabs a{font-weight:700;font-size:.9rem;padding:8px 14px;border:1px solid var(--line);color:var(--muted);text-decoration:none}
+.tabs a.on{background:var(--sea);border-color:var(--sea);color:#fff}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px}
+.card{background:var(--surface);border:1px solid var(--line);padding:16px;margin-bottom:14px}
+button{font:inherit;font-weight:700;padding:10px 16px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer}
+button.ghost{background:transparent;color:var(--ink);border-color:var(--line);font-weight:500}
+button[aria-pressed="true"]{background:var(--sea);border-color:var(--sea);color:#fff}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--chili);outline-offset:2px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:14px}
+@media (max-width:760px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.tiles .tile:last-child{grid-column:1/-1}}
+.tile{background:var(--surface);border:1px solid var(--line);padding:14px}
+.tile .k{color:var(--muted);font-size:.85rem}
+.tile .v{font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.25}
+.tile .h{color:var(--muted);font-size:.76rem}
+.tile.hl{border-color:var(--sea);box-shadow:inset 0 0 0 1px var(--sea)}
+.note{font-size:.88rem;color:var(--muted);border-left:3px solid var(--chili);padding:6px 12px;margin:0 0 14px}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th,td{text-align:right;padding:8px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+td.l,th.l{text-align:left}
+td.wr{white-space:normal;min-width:150px;text-align:left}
+th{color:var(--muted);font-weight:500;font-size:.82rem}
+td small{color:var(--muted);font-size:.76rem}
+.neg{color:var(--chili)}.pos{color:var(--sea)}
+.empty{color:var(--muted);padding:8px 0}
+.tag{display:inline-block;font-size:.74rem;font-weight:700;padding:1px 8px;border:1px solid var(--line)}
+.tag.광고비{border-color:var(--chili);color:var(--chili)}.tag.취소{color:var(--muted);text-decoration:line-through}
+.fgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:640px){.fgrid{grid-template-columns:1fr 1fr}}
+.fgrid label{display:block;font-size:.8rem;font-weight:700;color:var(--muted)}
+.fgrid .w2{grid-column:span 2}.fgrid .w3{grid-column:1/-1}
+.fgrid input,.fgrid select,#key{display:block;width:100%;margin-top:4px;font:inherit;font-size:.95rem;padding:9px 10px;border:1px solid var(--line);background:var(--field);color:var(--ink)}
+.kind{margin-bottom:12px}
+.row-btns{display:flex;gap:8px;margin-top:12px}
+.row-btns button[type=submit]{flex:1}
+.del{border:0;background:none;color:var(--muted);font-weight:500;font-size:.8rem;padding:2px 4px}
+tr[data-id]{cursor:pointer}
+.err{color:var(--chili);font-weight:700;min-height:1.2em;margin:8px 0 0}
+.lock{max-width:380px;margin:10vh auto}
+.foot{text-align:right}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="tabs"><a href="/stats/">홈페이지 통계</a><a href="/stats/ledger/" class="on">광고 장부</a></div>
+
+  <section class="card lock" id="lock">
+    <h1>광고 장부</h1>
+    <p class="sub" style="margin-top:6px">사장님만 보는 페이지예요. 통계 페이지와 같은 비밀번호를 넣어 주세요.</p>
+    <form id="pinForm"><input id="key" type="password" autocomplete="current-password" aria-label="비밀번호" required><p class="err" id="pinErr" role="alert"></p><button type="submit" style="width:100%">장부 보기</button></form>
+  </section>
+
+  <div id="app" hidden>
+    <header>
+      <h1>광고별 손님·매출·이익<small id="range"></small></h1>
+      <div class="seg" id="period" role="group" aria-label="기간">
+        <button type="button" class="ghost" data-p="this">이번 달</button><button type="button" class="ghost" data-p="last">지난달</button><button type="button" class="ghost" data-p="3m">3개월</button><button type="button" class="ghost" data-p="all">전체</button>
+      </div>
+    </header>
+
+    <div class="tiles" id="tiles"></div>
+    <p class="note">광고 보고 온 손님이 있으면 한 줄씩 적어 주세요. "어떻게 알고 오셨어요?" 한마디면 돼요. 광고비는 네이버 광고 관리자나 인스타그램에서 확인해서 <b>광고비</b>로 적으면, 광고마다 쓴 돈보다 얼마나 더 벌었는지 계산돼요. 이익 = 매출 − 재료비 − 광고비.</p>
+
+    <section class="card"><h2>광고·키워드별 결과</h2><p class="sub">어떤 광고가 실제로 손님과 돈을 데려오는지</p><div class="tbl" id="tKw"></div></section>
+
+    <section class="card" id="formCard">
+      <h2 id="fTitle">새로 적기</h2><p class="sub">빈칸은 비워 둬도 돼요</p>
+      <div class="kind seg" role="group" aria-label="종류"><button type="button" class="ghost" data-k="guest">손님 1팀</button><button type="button" class="ghost" data-k="spend">광고비</button></div>
+      <form id="f">
+        <input type="hidden" name="id"><input type="hidden" name="kind" value="guest">
+        <div class="fgrid">
+          <label>날짜<input type="date" name="day"></label>
+          <label>알게 된 곳<input name="channel" list="dlCh" placeholder="네이버 플레이스 광고"></label>
+          <label>키워드<input name="keyword" list="dlKw" placeholder="예: 속초 생선찜"></label>
+          <label class="g w2">드신 메뉴<input name="menu" placeholder="예: 가오리찜 중, 오징어순대"></label>
+          <label class="g">인원<input name="people" inputmode="numeric" placeholder="예: 3"></label>
+          <label class="g">어떻게<select name="status"><option>방문</option><option>포장</option><option>예약</option><option>전화 문의</option><option>취소</option></select></label>
+          <label class="g">결제 금액(원)<input name="revenue" inputmode="numeric" placeholder="0"></label>
+          <label class="g">재료비(원)<input name="cost" inputmode="numeric" placeholder="모르면 비움"></label>
+          <label class="s w2" hidden>광고비(원)<input name="amount" inputmode="numeric" placeholder="이 광고·키워드에 쓴 돈"></label>
+          <label class="w3">메모<input name="memo"></label>
+        </div>
+        <p class="err" id="fErr" role="alert"></p>
+        <div class="row-btns"><button type="submit" id="fSave">저장</button><button type="button" class="ghost" id="fCancel" hidden>취소</button></div>
+      </form>
+      <datalist id="dlCh"><option>네이버 플레이스 광고</option><option>네이버 파워링크</option><option>네이버 지도·검색</option><option>홈페이지</option><option>인스타그램</option><option>블로그 체험단</option><option>지나가다</option><option>단골·재방문</option><option>지인 소개</option></datalist>
+      <datalist id="dlKw"></datalist>
+    </section>
+
+    <section class="card"><h2>기록</h2><p class="sub">고치려면 줄을 눌러 주세요</p><div class="tbl" id="tRows"></div></section>
+
+    <div class="foot"><button type="button" class="ghost" id="logout">이 기기에서 잠그기</button></div>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY="dp-stats-key", PER="dp-ledger-period";
+  var $=function(id){return document.getElementById(id)};
+  function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}}
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+  function won(x){x=Math.round(Number(x||0));return (x<0?"-":"")+Math.abs(x).toLocaleString("ko-KR")+"원"}
+  function num(v){return String(v||"").replace(/[^0-9]/g,"")}
+  var period=ls(PER)||"this", rows=[], calls=[];
+  function api(method,body,q){return fetch("/api/ledger"+(q||""),{method:method,headers:{"x-stats-key":ls(KEY)||"","content-type":"application/json"},body:body?JSON.stringify(body):undefined})
+    .then(function(r){return r.json().then(function(j){return{s:r.status,j:j}})})}
+  function showLock(msg){$("app").hidden=true;$("lock").hidden=false;$("pinErr").textContent=msg||""}
+  function load(){
+    api("GET").then(function(x){
+      if(x.s===401){ls(KEY,null);showLock("비밀번호가 맞지 않아요.");return}
+      if(x.s===503){showLock("통계 저장소가 아직 연결되지 않았어요.");return}
+      if(x.s!==200){showLock("불러오지 못했어요. 잠시 뒤 다시 열어 주세요.");return}
+      $("lock").hidden=true;$("app").hidden=false;rows=x.j.rows||[];calls=x.j.calls||[];render();
+    }).catch(function(){showLock("인터넷 연결을 확인해 주세요.")});
+  }
+  function today(){return new Date(Date.now()+9*3600e3).toISOString().slice(0,10)}
+  function range(){var t=today(),y=+t.slice(0,4),m=+t.slice(5,7);function ym(y,m){while(m<1){m+=12;y--}return y+"-"+String(m).padStart(2,"0")}
+    if(period==="this")return[ym(y,m)+"-01","9999",t.slice(0,7)+" (이번 달)"];
+    if(period==="last")return[ym(y,m-1)+"-01",ym(y,m)+"-01",ym(y,m-1)+" (지난달)"];
+    if(period==="3m")return[ym(y,m-2)+"-01","9999","최근 3개월"];return["0000","9999","전체 기간"]}
+  function tile(k,v,h,cls,hl){return '<div class="tile'+(hl?" hl":"")+'"><div class="k">'+k+'</div><div class="v '+(cls||"")+'">'+v+'</div><div class="h">'+h+'</div></div>'}
+  function render(){
+    var r=range(), inR=function(d){return d>=r[0]&&d<r[1]}, list=rows.filter(function(x){return inR(x.day)});
+    $("range").textContent=r[2];
+    document.querySelectorAll("#period button").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.p===period))});
+    var by={},T={teams:0,ppl:0,rev:0,cost:0,ad:0};
+    list.forEach(function(x){var k=(x.channel||"").trim()+"|"+(x.keyword||"").trim();var o=by[k]||(by[k]={ch:(x.channel||"").trim(),kw:(x.keyword||"").trim(),teams:0,ppl:0,rev:0,cost:0,ad:0});
+      if(x.kind==="spend"){o.ad+=+x.amount||0;T.ad+=+x.amount||0;return}
+      if(x.status==="취소")return;
+      o.teams++;T.teams++;o.ppl+=+x.people||0;T.ppl+=+x.people||0;o.rev+=+x.revenue||0;o.cost+=+x.cost||0;T.rev+=+x.revenue||0;T.cost+=+x.cost||0});
+    var hpCalls=calls.filter(function(c){return inR(c.day)}).reduce(function(a,c){return a+(+c.c||0)},0);
+    var profit=T.rev-T.cost-T.ad;
+    $("tiles").innerHTML=
+      tile("장부에 적은 손님",T.teams+"팀",T.ppl?T.ppl+"명":"인원 미입력")+
+      tile("매출",won(T.rev),"장부에 적은 결제 금액")+
+      tile("광고비",won(T.ad),T.teams&&T.ad?"1팀당 "+won(T.ad/T.teams):"광고비 기록 기준")+
+      tile("이익",won(profit),T.ad?"광고비 1원당 매출 "+(Math.round(T.rev/T.ad*10)/10)+"원":"매출 − 재료비 − 광고비",profit<0?"neg":"pos",true)+
+      tile("홈페이지 전화 버튼",hpCalls+"번","자동 집계 (통계 탭과 같아요)");
+    var ks=Object.keys(by).map(function(k){var o=by[k];o.p=o.rev-o.cost-o.ad;return o}).sort(function(a,b){return b.p-a.p});
+    $("tKw").innerHTML=ks.length?'<table><thead><tr><th>알게 된 곳 · 키워드</th><th>손님</th><th>인원</th><th>매출</th><th>재료비</th><th>광고비</th><th>이익</th><th>1팀당 광고비</th><th>광고비 대비 매출</th></tr></thead><tbody>'+ks.map(function(o){
+      return '<tr><td>'+esc(o.ch||"(모름)")+(o.kw?'<br><small>'+esc(o.kw)+'</small>':'')+'</td><td>'+o.teams+'팀</td><td>'+(o.ppl||"-")+'</td><td>'+won(o.rev)+'</td><td>'+won(o.cost)+'</td><td>'+won(o.ad)+'</td><td class="'+(o.p<0?"neg":"pos")+'"><b>'+won(o.p)+'</b></td><td>'+(o.teams&&o.ad?won(o.ad/o.teams):"-")+'</td><td>'+(o.ad?(Math.round(o.rev/o.ad*10)/10)+"배":"-")+'</td></tr>'}).join("")+'</tbody></table>':'<p class="empty">이 기간에 적은 기록이 없어요.</p>';
+    $("tRows").innerHTML=list.length?'<table><thead><tr><th>날짜</th><th class="l">구분</th><th class="l">알게 된 곳 · 키워드</th><th class="l">메뉴 · 메모</th><th>금액</th><th></th></tr></thead><tbody>'+list.map(function(x){
+      var sp=x.kind==="spend", st=sp?"광고비":(x.status||"방문");
+      return '<tr data-id="'+x.id+'"><td>'+esc(x.day.slice(5).replace("-","."))+'</td><td class="l"><span class="tag '+esc(st)+'">'+esc(st)+'</span>'+(!sp&&+x.people?' <small>'+(+x.people)+'명</small>':'')+'</td><td class="l">'+esc(x.channel||"")+(x.keyword?'<br><small>'+esc(x.keyword)+'</small>':'')+'</td><td class="wr">'+esc(x.menu||"")+(x.memo?'<br><small>'+esc(x.memo)+'</small>':'')+'</td><td>'+(sp?won(x.amount):(+x.revenue?won(x.revenue):""))+'</td><td><button type="button" class="del" data-del="'+x.id+'">지우기</button></td></tr>'}).join("")+'</tbody></table>':'<p class="empty">아직 기록이 없어요. 위에서 첫 줄을 적어 보세요.</p>';
+    var kws={};rows.forEach(function(x){if(x.keyword)kws[x.keyword]=1});$("dlKw").innerHTML=Object.keys(kws).map(function(k){return "<option>"+esc(k)+"</option>"}).join("");
+  }
+  var F=$("f");
+  function setKind(k){F.kind.value=k;document.querySelectorAll(".kind button").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.k===k))});
+    document.querySelectorAll("#f .g").forEach(function(e){e.hidden=k==="spend"});document.querySelector("#f .s").hidden=k!=="spend"}
+  function reset(){F.reset();F.id.value="";F.day.value=today();setKind("guest");$("fTitle").textContent="새로 적기";$("fCancel").hidden=true;$("fErr").textContent=""}
+  document.querySelector(".kind").addEventListener("click",function(e){var b=e.target.closest("button");if(b)setKind(b.dataset.k)});
+  $("fCancel").addEventListener("click",reset);
+  F.addEventListener("submit",function(e){e.preventDefault();
+    var sp=F.kind.value==="spend";
+    var row={id:F.id.value,kind:F.kind.value,day:F.day.value,channel:F.channel.value.trim(),keyword:F.keyword.value.trim(),menu:sp?"":F.menu.value.trim(),people:sp?"":num(F.people.value),status:sp?"":F.status.value,revenue:sp?"":num(F.revenue.value),cost:sp?"":num(F.cost.value),amount:sp?num(F.amount.value):"",memo:F.memo.value.trim()};
+    if(sp&&!row.amount){$("fErr").textContent="광고비 금액을 넣어 주세요.";return}
+    $("fSave").disabled=true;
+    api("POST",row).then(function(x){$("fSave").disabled=false;if(x.s!==200){$("fErr").textContent="저장하지 못했어요. 다시 눌러 주세요.";return}reset();load()})
+      .catch(function(){$("fSave").disabled=false;$("fErr").textContent="인터넷 연결을 확인해 주세요."});
+  });
+  $("tRows").addEventListener("click",function(e){
+    var d=e.target.closest("[data-del]");
+    if(d){e.stopPropagation();if(!confirm("이 기록을 지울까요?"))return;api("DELETE",null,"?id="+d.dataset.del).then(load);return}
+    var tr=e.target.closest("tr[data-id]");if(!tr)return;var x=rows.find(function(r){return String(r.id)===tr.dataset.id});if(!x)return;
+    setKind(x.kind||"guest");["id","day","channel","keyword","menu","memo"].forEach(function(k){F[k].value=x[k]||""});
+    F.status.value=x.status||"방문";F.people.value=+x.people||"";F.revenue.value=+x.revenue||"";F.cost.value=+x.cost||"";F.amount.value=+x.amount||"";
+    $("fTitle").textContent="기록 고치기";$("fCancel").hidden=false;$("formCard").scrollIntoView({behavior:"smooth"});
+  });
+  $("period").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;period=b.dataset.p;ls(PER,period);render()});
+  $("pinForm").addEventListener("submit",function(e){e.preventDefault();var k=$("key").value.trim();if(!k)return;ls(KEY,k);ls("dp-owner","1");load()});
+  $("logout").addEventListener("click",function(){ls(KEY,null);$("key").value="";showLock("")});
+  reset();
+  if(ls(KEY))load();else showLock("");
+})();
+</script>
+</body>
+</html>

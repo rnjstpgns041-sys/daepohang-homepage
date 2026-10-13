@@ -48,11 +48,15 @@ td small{display:block;color:var(--muted);font-size:.75rem}
 .note{color:var(--muted);font-size:.85rem}
 .note li{margin:4px 0}
 .err{color:var(--chili);font-weight:700}
+.tabs{display:flex;gap:6px}
+.tabs a{font-weight:700;font-size:.9rem;padding:8px 14px;border:1px solid var(--line);color:var(--muted);text-decoration:none}
+.tabs a.on{background:var(--sea);border-color:var(--sea);color:#fff}
 [hidden]{display:none!important}
 </style>
 </head>
 <body>
 <div class="wrap">
+  <nav class="tabs"><a href="/stats/" class="on">홈페이지 통계</a><a href="/stats/ledger/">광고 장부</a></nav>
   <header>
     <h1>홈페이지 통계</h1>
     <p class="sub">대포항생선찜본점 · daepohang-fish.pages.dev · 사장님만 보는 페이지</p>
