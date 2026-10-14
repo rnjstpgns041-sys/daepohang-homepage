@@ -359,7 +359,7 @@ def page(p):
     </ul>
   </nav>
 </main>
-<footer><div class="wrap">대포항생선찜본점 · {ADDR} · {PHONE} · <a href="{INSTA}" target="_blank" rel="noopener">인스타그램</a></div></footer>
+<footer><div class="wrap">대포항생선찜본점 · {ADDR} · {PHONE} · <a href="{INSTA}" target="_blank" rel="noopener">인스타그램</a><div class="credit" style="margin-top:6px;font-size:.8rem">제작 <a href="https://webstudio-4e9.pages.dev/" target="_blank" rel="noopener">웹 스튜디오</a></div></div></footer>
 <nav class="dock" aria-label="빠른 연결">
   <a class="call" href="tel:050713644060">전화하기</a>
   <a href="https://map.naver.com/p/search/%EB%8C%80%ED%8F%AC%ED%95%AD%EC%83%9D%EC%84%A0%EC%B0%9C%EB%B3%B8%EC%A0%90" target="_blank" rel="noopener">길찾기·리뷰</a>
