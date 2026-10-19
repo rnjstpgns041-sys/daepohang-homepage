@@ -273,6 +273,7 @@ PLATE = """  <section class="plate" aria-label="이렇게 나와요">
     <p>보글보글 끓는 찜 냄비를 가운데 두고, 생선살 한 점을 밥 위에 올린 다음 양념을 한 숟갈 끼얹어 보세요. 마지막엔 남은 양념에 밥을 비벼 먹는 것까지가 대포항 생선찜의 한 끼입니다.</p>
   </section>
 __REVIEWS__
+  <div id="order-helper" class="order-wrap"></div>
   <section class="hungry" aria-label="주문 안내">
     <h2>배고프실 때, 전화 한 통이면 돼요</h2>
     <p>자리 문의도, 포장 주문도 전화로 바로 됩니다. 미리 주문하시면 기다리지 않고 받아 가실 수 있어요.</p>
@@ -384,6 +385,7 @@ def page(p):
   <a href="/#menu">메뉴 보기</a>
 </nav>
 <script src="/js/copy.js" defer></script>
+<script src="/js/order.js" defer></script>
 <script src="/js/track.js" defer></script>
 </body>
 </html>
@@ -435,6 +437,7 @@ article .reviews h2{margin:6px 0 0;padding:0;border:0;font-size:clamp(1.2rem,3.6
 .btn-rv{color:var(--ink);border-color:var(--ink)}
 .btn-rv-call{background:var(--chili);color:#fff;border-color:var(--chili)}
 """
+CSS += ".order-wrap{margin:40px 0}"
 open(os.path.join(ROOT,"css","sub.css"),"w",encoding="utf-8").write(CSS)
 for p in PAGES:
     d = os.path.join(ROOT,p["slug"]); os.makedirs(d,exist_ok=True)
