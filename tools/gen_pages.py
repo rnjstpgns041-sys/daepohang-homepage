@@ -272,6 +272,7 @@ PLATE = """  <section class="plate" aria-label="이렇게 나와요">
     </div>
     <p>보글보글 끓는 찜 냄비를 가운데 두고, 생선살 한 점을 밥 위에 올린 다음 양념을 한 숟갈 끼얹어 보세요. 마지막엔 남은 양념에 밥을 비벼 먹는 것까지가 대포항 생선찜의 한 끼입니다.</p>
   </section>
+__REVIEWS__
   <section class="hungry" aria-label="주문 안내">
     <h2>배고프실 때, 전화 한 통이면 돼요</h2>
     <p>자리 문의도, 포장 주문도 전화로 바로 됩니다. 미리 주문하시면 기다리지 않고 받아 가실 수 있어요.</p>
@@ -279,6 +280,18 @@ PLATE = """  <section class="plate" aria-label="이렇게 나와요">
       <a class="btn btn-primary" href="tel:050713644060">전화로 주문·문의</a>
       <a class="btn btn-line" href="https://map.naver.com/p/search/%EB%8C%80%ED%8F%AC%ED%95%AD%EC%83%9D%EC%84%A0%EC%B0%9C%EB%B3%B8%EC%A0%90" target="_blank" rel="noopener">길찾기</a>
     </div>
+  </section>"""
+
+from reviews import REVIEWS, BLOG_REVIEWS, NAVER_PLACE
+
+def reviews_html():
+    cards = "".join(f'<li><p>“{t}”</p><span>{w}{" · "+d if d else ""}</span></li>' for t,w,d in REVIEWS[:6])
+    lst = f'<ul class="rv-list">{cards}</ul>' if cards else ""
+    return f"""  <section class="reviews" aria-label="손님 후기">
+    <p class="rv-badge">네이버 블로그 후기 {BLOG_REVIEWS}건 이상</p>
+    <h2>먼저 다녀간 손님들이 남긴 이야기</h2>
+{lst}
+    <div class="cta"><a class="btn btn-rv" href="{NAVER_PLACE}" target="_blank" rel="noopener">네이버 리뷰 전체 보기</a><a class="btn btn-rv-call" href="tel:050713644060">지금 전화하기</a></div>
   </section>"""
 
 def page(p):
@@ -328,12 +341,17 @@ def page(p):
     <p class="eyebrow">{p['kw']}</p>
     <h1>{p['h1']}</h1>
     <p class="lede">{p['lede']}</p>
+    <div class="quick">
+      <a class="q-call" href="tel:050713644060"><b>전화로 자리·포장 문의</b><span>0507-1364-4060</span></a>
+      <a class="q-map" href="{NAVER_PLACE}" target="_blank" rel="noopener">길찾기</a>
+    </div>
+    <p class="q-note">대포항길 10 · 대포항 공영주차장 · 매주 수요일 휴무 · 전 메뉴 포장</p>
   </div>
   <figure class="photo"><img src="/img/{p['img']}" alt="{p['alt']}"><figcaption>대포항생선찜본점 · {p['kw']}</figcaption></figure>
 {taste(p)}
   <article>
 {p['body']}
-{PLATE}
+{PLATE.replace('__REVIEWS__', reviews_html())}
   <section class="info" aria-label="매장 정보">
     <h2>대포항생선찜본점</h2>
     <dl>
@@ -361,7 +379,7 @@ def page(p):
 </main>
 <footer><div class="wrap">대포항생선찜본점 · {ADDR} · {PHONE} · <a href="{INSTA}" target="_blank" rel="noopener">인스타그램</a><div class="credit" style="margin-top:6px;font-size:.8rem">제작 <a href="https://webstudio-4e9.pages.dev/" target="_blank" rel="noopener">웹 스튜디오</a></div></div></footer>
 <nav class="dock" aria-label="빠른 연결">
-  <a class="call" href="tel:050713644060">전화하기</a>
+  <a class="call" href="tel:050713644060">📞 전화 주문·문의</a>
   <a href="https://map.naver.com/p/search/%EB%8C%80%ED%8F%AC%ED%95%AD%EC%83%9D%EC%84%A0%EC%B0%9C%EB%B3%B8%EC%A0%90" target="_blank" rel="noopener">길찾기·리뷰</a>
   <a href="/#menu">메뉴 보기</a>
 </nav>
@@ -399,6 +417,24 @@ for e in EXTRA:
         h1=f"{kw}", lede=e["lede"], img=e["img"], alt=f"{kw} 대포항생선찜본점", body=body, faq=e["faq"]))
 
 os.makedirs(os.path.join(ROOT,"css"),exist_ok=True)
+CSS += """
+.quick{display:flex;gap:8px;justify-content:center;margin:20px auto 0;max-width:520px}
+.quick a{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;text-decoration:none;font-weight:700;border:1px solid var(--chili)}
+.quick .q-call{flex:1;background:var(--chili);color:#fff;padding:8px 14px}
+.quick .q-call b{font-size:1.05rem}.quick .q-call span{font-size:.85rem;font-weight:500;opacity:.9;font-variant-numeric:tabular-nums}
+.quick .q-map{padding:8px 18px;color:var(--chili);background:transparent}
+.q-note{margin:10px 0 0;font-size:.82rem;color:var(--muted)}
+.reviews{margin-top:40px;padding:24px 20px;background:var(--surface);border:1px solid var(--line);text-align:center}
+article .reviews h2{margin:6px 0 0;padding:0;border:0;font-size:clamp(1.2rem,3.6vw,1.45rem)}
+.rv-badge{display:inline-block;margin:0;font-size:.8rem;font-weight:700;color:var(--chili);border:1px solid var(--chili);padding:2px 10px}
+.rv-list{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:10px;text-align:left}
+@media (min-width:700px){.rv-list{grid-template-columns:1fr 1fr}}
+.rv-list li{background:var(--bg);border:1px solid var(--line);padding:14px 16px}
+.rv-list p{margin:0;font-size:.95rem}.rv-list span{display:block;margin-top:6px;font-size:.78rem;color:var(--muted)}
+.reviews .cta{justify-content:center}
+.btn-rv{color:var(--ink);border-color:var(--ink)}
+.btn-rv-call{background:var(--chili);color:#fff;border-color:var(--chili)}
+"""
 open(os.path.join(ROOT,"css","sub.css"),"w",encoding="utf-8").write(CSS)
 for p in PAGES:
     d = os.path.join(ROOT,p["slug"]); os.makedirs(d,exist_ok=True)
