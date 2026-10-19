@@ -410,3 +410,19 @@ seasonal("winter-seasonal-food", "겨울 제철 음식", "겨울",
  "겨울 무는 달고 단단해서 생선찜에 깔면 양념을 머금어 가장 맛있습니다. 겨울 생선과 겨울 무가 만나는 계절입니다.",
  f"대포항생선찜본점의 찜은 무를 넉넉히 깔아 냅니다. 겨울에는 {A('saengseon-jjim-mu','양념 밴 무')}까지 꼭 드셔 보세요.",
  L(A("sokcho-winter-matjip","속초 겨울 맛집"), A("donghae-winter-fish","동해 겨울 생선"), A("december-seasonal-food","12월 제철 음식")))
+
+# 2026-10-19: owner asked to take these off the site; drop them and unlink them from the pages that stay.
+REMOVED = {"sokcho-mulhoe","sokcho-daege","sokcho-makguksu","sokcho-gomchiguk","haemul-jjim-matjip","jjim-kinds",
+ "myeongtae-dishes","gaori-benefits","kodari-benefits","gajami-gui","imyeonsu-gui","godeungeo-gui","sokcho-yangmiri",
+ "sokcho-ojingeo","sundae-matjip","sundae-kinds","sokcho-things-to-do","sokcho-jungang-market","sokcho-abai-village",
+ "daepohang-hoe-center","gangneung-matjip"}
+import re as _re
+def _unlink(html):
+    for s in REMOVED:
+        html = _re.sub(r'<li><a href="/%s/">[^<]*</a></li>' % s, '', html)
+        html = _re.sub(r'<a href="/%s/">([^<]*)</a>' % s, r'\1', html)
+    return html
+P = [p for p in P if p["slug"] not in REMOVED]
+for p in P:
+    p["sections"] = [(h, _unlink(b)) for h, b in p["sections"]]
+    p["faq"] = [(q, _unlink(a)) for q, a in p["faq"]]
