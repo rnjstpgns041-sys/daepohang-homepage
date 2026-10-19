@@ -402,6 +402,7 @@ from pages7 import P as EXTRA7
 from pages8 import P as EXTRA8
 from pages9 import P as EXTRA9
 from pages10 import P as EXTRA10
+from pages11 import P as EXTRA11
 NEW = {e['slug'] for e in EXTRA3}
 NEW4 = {e['slug'] for e in EXTRA4}
 NEW5 = {e['slug'] for e in EXTRA5}
@@ -409,8 +410,8 @@ NEW6 = {e['slug'] for e in EXTRA6}
 NEW7 = {e['slug'] for e in EXTRA7}
 NEW8 = {e['slug'] for e in EXTRA8}
 NEW9 = {e['slug'] for e in EXTRA9}
-NEW10 = {e['slug'] for e in EXTRA10}
-EXTRA = EXTRA + EXTRA3 + EXTRA4 + EXTRA5 + EXTRA6 + EXTRA7 + EXTRA8 + EXTRA9 + EXTRA10
+NEW10 = {e['slug'] for e in EXTRA10} | {e['slug'] for e in EXTRA11}
+EXTRA = EXTRA + EXTRA3 + EXTRA4 + EXTRA5 + EXTRA6 + EXTRA7 + EXTRA8 + EXTRA9 + EXTRA10 + EXTRA11
 for p in PAGES: p.setdefault("cat","대표")
 for e in EXTRA:
     body = "".join(f"\n<h2>{h}</h2>\n{html}" for h,html in e["sections"])
