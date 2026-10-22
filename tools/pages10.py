@@ -26,7 +26,7 @@ SHOP = f"<p>대포항생선찜본점은 속초시 대포항길 10, 대포항 안
 def notsold(slug, kw, dish, img, lede, about, instead, more):
     add(slug, kw, "메뉴", img, lede,
      [(f"{dish}, 이런 음식", f"<p>{about}</p>"),
-      (f"{dish} 대신 생선찜은 어떠세요", f"<p>대포항생선찜본점에서는 {dish}를 팔지 않습니다. {instead}</p>"),
+      (f"{dish} 대신 생선찜은 어떠세요", f"<p>대포항생선찜본점에서는 {dish}{'을' if (ord(dish[-1])-0xAC00)%28 else '를'} 팔지 않습니다. {instead}</p>"),
       ("추천 메뉴", MENU_LINKS),
       ("가게 정보", SHOP),
       ("더 보기", more)],
