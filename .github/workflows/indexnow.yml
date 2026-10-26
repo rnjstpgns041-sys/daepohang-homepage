@@ -1,0 +1,34 @@
+# On every push to main, tell Naver and Bing (IndexNow) which pages changed.
+# Waits until Cloudflare Pages has deployed (key file reachable) before sending.
+name: indexnow
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", "tools/indexnow-queue.txt"]
+  workflow_dispatch:
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Collect changed URLs
+        run: |
+          BEFORE="${{ github.event.before }}"
+          if [ -z "$BEFORE" ] || ! git cat-file -e "$BEFORE" 2>/dev/null; then BEFORE=HEAD~1; fi
+          git diff --name-only --diff-filter=AM "$BEFORE" HEAD -- site | grep '/index.html$' \
+            | sed -e 's#^site/##' -e 's#index.html$##' -e 's#^#https://daepohang-fish.pages.dev/#' > urls.txt || true
+          if git diff --name-only "$BEFORE" HEAD | grep -qx tools/indexnow-queue.txt; then cat tools/indexnow-queue.txt >> urls.txt; fi
+          wc -l urls.txt
+      - name: Wait for deploy
+        run: |
+          for i in $(seq 1 40); do
+            if curl -fsS "https://daepohang-fish.pages.dev/3cf415cdd028560ad0479ba3fa85047c.txt" | grep -q "3cf415cdd028560ad0479ba3fa85047c"; then
+              if [ -s urls.txt ]; then u=$(tail -1 urls.txt); curl -fsS -o /dev/null "$u" && exit 0; else exit 0; fi
+            fi
+            sleep 15
+          done
+          echo "deploy not visible yet"; exit 1
+      - name: Send to IndexNow
+        run: python3 tools/indexnow.py < urls.txt
