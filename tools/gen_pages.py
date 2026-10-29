@@ -511,6 +511,9 @@ if 'id="guide"' not in s or True:
 </style>"""
     s = s.replace("</style>", css, 1)
     site_ld = '<script type="application/ld+json">'+json.dumps({"@context":"https://schema.org","@type":"WebSite","name":"대포항생선찜본점","alternateName":["대포항 생선찜","속초 대포항생선찜"],"url":BASE+"/"},ensure_ascii=False)+'</script>'
+    qa = re.findall(r'<details class="qa"><summary>(.*?)</summary><p>(.*?)</p></details>', s)
+    if qa:
+        site_ld += '\n<script type="application/ld+json">'+json.dumps({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in qa]},ensure_ascii=False)+'</script>'
     s = s.replace("</head>", jsonld(PAGES[1]).split("\n")[0].replace(PAGES[1]["img"],"gaori-jjim.jpg")+"\n"+site_ld+"\n</head>",1)
     s = s.replace('<meta name="description" content="속초 대포항 생선찜·생선구이 전문점.','<meta name="description" content="속초 대포항 맛집 대포항생선찜본점. 생선찜·생선구이 전문점.',1)
     open(hp,"w",encoding="utf-8").write(s)

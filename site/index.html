@@ -148,6 +148,56 @@ h2{font-size:clamp(1.7rem,4.4vw,2.6rem)}
 .btn.sm{padding:3px 12px;font-size:.8rem;margin-left:6px;vertical-align:middle}
 @media (max-width:820px){.visit .wrap{grid-template-columns:1fr;gap:28px}.visit .photo img{aspect-ratio:4/3}}
 
+/* v2: first screen = what, where, when + call */
+.hero{padding:22px 0 30px}
+.hero .wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:44px;align-items:center}
+.hero-img img{width:100%;aspect-ratio:5/4;object-fit:cover}
+.hero h1{font-size:clamp(2rem,6.4vw,3.4rem);letter-spacing:.03em;margin:6px 0 0}
+.hero h1 small{display:block;font-family:var(--body);font-weight:700;font-size:clamp(1rem,3.6vw,1.2rem);color:var(--red);letter-spacing:0;margin-top:8px}
+.hero .cap{margin:0}
+.where{margin:8px 0 0;color:var(--soft);font-size:.95rem}
+.facts{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 0;padding:0}
+.facts li{border:1px solid var(--rule);background:var(--paper2);padding:3px 10px;font-size:.86rem;line-height:1.6}
+.facts li b{font-weight:700}
+.cta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
+.go{display:flex;align-items:center;justify-content:center;min-height:48px;padding:10px 16px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);text-decoration:none;font-weight:700;font-size:1rem}
+.go.call{background:var(--red);border-color:var(--red);color:#fff}
+.cta .call{grid-column:span 2;font-size:1.08rem}
+@media (max-width:820px){.hero{padding:0 0 26px}.hero .wrap{grid-template-columns:1fr;gap:16px;padding:0}.hero-img img{aspect-ratio:16/10}.hero-txt{padding:0 20px}}
+.trust{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--paper2)}
+.trust .wrap{display:grid;grid-template-columns:repeat(3,1fr)}
+.trust .t{display:block;text-align:center;padding:18px 8px;text-decoration:none;border-right:1px solid var(--rule)}
+.trust .t:last-child{border-right:0}
+.trust b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(1.05rem,3.6vw,1.5rem);color:var(--red)}
+.trust span{display:block;font-size:.82rem;color:var(--soft);line-height:1.5;margin-top:2px}
+.trust u{text-decoration:none;color:var(--ink);font-weight:700;font-size:.78rem}
+@media (max-width:480px){.trust .t{padding:14px 4px}.trust span{font-size:.74rem;letter-spacing:-.02em}.trust u{font-size:.72rem}}
+.walk{padding:64px 0 72px}
+.walk .lead{color:var(--soft);margin:10px 0 0}
+.dish{position:relative;display:block;margin:0;text-decoration:none;color:inherit;background:var(--paper);border:1px solid var(--rule)}
+.dish img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.dish b{display:block;font-family:var(--display);font-weight:800;font-size:1.12rem;padding:10px 12px 0}
+.dish>span:not(.tag){display:block;font-size:.86rem;color:var(--soft);padding:2px 12px 12px;line-height:1.5}
+.dish .tag{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;font-size:.78rem;font-weight:700;padding:2px 8px}
+.dish .tag.mild{background:var(--sea)}
+.walk .grid .dish.wide{grid-column:span 2}.walk .dish.wide img{aspect-ratio:16/9}
+a.dish:hover{border-color:var(--red)}
+.more-cta{text-align:center;margin:28px 0 0}
+.more-cta .go{display:inline-flex;min-width:260px}
+.faq{padding:72px 0;background:var(--paper2);border-top:1px solid var(--rule)}
+.faq .wrap{max-width:780px}
+.faq .head{text-align:center;margin-bottom:24px}
+.qa{border-bottom:1px solid var(--rule);background:var(--paper)}
+.qa:first-of-type{border-top:1px solid var(--rule)}
+.qa summary{cursor:pointer;padding:16px 18px;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"+";color:var(--red);font-weight:800}
+.qa[open] summary::after{content:"−"}
+.qa p{margin:0;padding:0 18px 16px;color:var(--soft)}
+.open .h1like{font-family:var(--display);font-weight:800;line-height:1.3;margin:34px auto 6px;font-size:clamp(2rem,7vw,3.6rem);letter-spacing:.06em}
+.open .h1like small{display:block;font-family:var(--latin);font-weight:500;font-style:italic;font-size:clamp(1rem,2.6vw,1.35rem);letter-spacing:.08em;color:var(--soft);margin-top:6px}
+.open{border-top:1px solid var(--rule)}
+
 /* more (guide block injected by generator) */
 #guide{padding:80px 0}
 .alt{background:var(--paper2)}
@@ -174,6 +224,7 @@ footer span{margin:0 8px;display:inline-block}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Restaurant", "name": "대포항생선찜본점", "url": "https://daepohang-fish.pages.dev/", "telephone": "0507-1364-4060", "sameAs": ["https://www.instagram.com/jjimmy_1"], "image": "https://daepohang-fish.pages.dev/img/gaori-jjim.jpg", "servesCuisine": ["생선찜", "생선구이", "오징어순대"], "address": {"@type": "PostalAddress", "streetAddress": "대포항길 10", "addressLocality": "속초시", "addressRegion": "강원특별자치도", "addressCountry": "KR"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "10:00", "closes": "21:00"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "대포항생선찜본점", "alternateName": ["대포항 생선찜", "속초 대포항생선찜"], "url": "https://daepohang-fish.pages.dev/"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "주차는 어디에 하나요?", "acceptedAnswer": {"@type": "Answer", "text": "대포항 공영주차장에 세우시면 됩니다. 주차 후 걸어서 몇 분 거리예요."}}, {"@type": "Question", "name": "포장도 되나요?", "acceptedAnswer": {"@type": "Answer", "text": "찜, 구이, 순대 모두 포장됩니다. 전화로 미리 주문해 두시면 바로 가져가실 수 있어요."}}, {"@type": "Question", "name": "찜은 몇 인분인가요?", "acceptedAnswer": {"@type": "Answer", "text": "소는 2인, 중은 3인, 대는 4인 기준입니다."}}, {"@type": "Question", "name": "반려동물과 함께 가도 되나요?", "acceptedAnswer": {"@type": "Answer", "text": "네, 반려동물 동반 가능합니다. 출입문에 환영 스티커도 붙어 있어요."}}, {"@type": "Question", "name": "아이와 가기 괜찮나요?", "acceptedAnswer": {"@type": "Answer", "text": "아기 의자를 여러 개 준비해 두었고, 맵지 않은 모듬생선구이가 있어 아이와 함께 드시기 좋아요."}}, {"@type": "Question", "name": "단체로 가도 되나요?", "acceptedAnswer": {"@type": "Answer", "text": "칸막이가 있는 넓은 홀이라 가족, 모임 식사도 편합니다. 인원이 많으면 미리 전화 주세요."}}, {"@type": "Question", "name": "쉬는 날은 언제인가요?", "acceptedAnswer": {"@type": "Answer", "text": "매주 수요일 정기휴무이고, 다른 날은 10:00부터 21:00까지 영업합니다."}}]}</script>
 </head>
 <body>
 
@@ -184,59 +235,60 @@ footer span{margin:0 8px;display:inline-block}
       <a href="#story">이야기</a>
       <a class="k" href="#menu">메뉴</a>
       <a href="#hall">매장</a>
+      <a href="#faq">자주 묻는 것</a>
       <a class="k" href="#visit">오시는 길</a>
     </nav>
   </div>
 </header>
 
 <main id="top">
-  <section class="open">
+  <section class="hero">
     <div class="wrap">
-      <p class="cap">Sokcho · Daepohang Harbour</p>
-      <blockquote>항구를 한 바퀴 걷고 오세요.<br>그사이 찜 냄비가 보글보글 끓고 있을 거예요.</blockquote>
-      <h1>대포항생선찜<small>Steamed fish by the harbour, Sokcho</small></h1>
-      <div class="orn" aria-hidden="true"><i>◆</i></div>
-    </div>
-  </section>
-
-  <div class="wrap">
-    <figure class="photo hero-photo">
-      <img src="img/gaori-jjim.jpg" alt="양념이 듬뿍 올라간 가오리찜, 하얀 속살이 결대로 찢어진 모습">
-      <figcaption><b>위</b>칼칼한 양념을 듬뿍 올린 가오리찜</figcaption>
-    </figure>
-  </div>
-
-  <section class="letter" id="story">
-    <div class="wrap">
-      <div>
-        <p class="eyebrow">Our Story</p>
-        <h2>대포항에 보내는<br>편지 한 장</h2>
-      </div>
-      <div class="body">
-        <p>속초 남쪽 끝, 고깃배가 드나들고 튀김 냄새가 골목을 채우는 대포항. 회 한 접시도 좋지만, 바닷바람을 맞고 나면 따뜻한 밥 한 공기가 생각나기 마련입니다.</p>
-        <p>그래서 우리는 생선을 찝니다. 두툼한 무를 깔고, 그날 들어온 생선을 올리고, 고춧가루와 마늘 양념을 끼얹어 천천히. 양념이 졸아들며 무와 생선살 속까지 배어들면, 밥 위에 한 점 올려 드세요.</p>
-        <p>벽에는 다녀간 선수들의 사인볼이, 테이블 옆에는 아기 의자가, 문에는 반려동물을 환영한다는 스티커가 붙어 있습니다. 누구와 오셔도 편한 항구 앞 밥집이고 싶습니다.</p>
-        <p class="sign">대포항생선찜본점 드림</p>
+      <figure class="photo hero-img"><img src="img/gaori-jjim.jpg" alt="양념이 듬뿍 올라간 가오리찜, 하얀 속살이 결대로 찢어진 모습" fetchpriority="high"></figure>
+      <div class="hero-txt">
+        <p class="cap">Sokcho · Daepohang Harbour</p>
+        <h1>대포항생선찜본점<small>속초 대포항 생선찜 · 가오리찜 · 생선구이</small></h1>
+        <p class="where">대포항 안쪽 상가 1층, 노란·분홍 네온 간판</p>
+        <ul class="facts" aria-label="한눈에 보기">
+          <li><b>매일 10:00~21:00</b> 수요일 휴무</li>
+          <li>전 메뉴 포장</li>
+          <li>반려동물 동반</li>
+          <li>아기 의자</li>
+          <li>대포항 공영주차장</li>
+        </ul>
+        <div class="cta">
+          <a class="go call" href="tel:050713644060">전화 예약·포장 주문</a>
+          <a class="go" href="https://map.naver.com/p/search/%EB%8C%80%ED%8F%AC%ED%95%AD%EC%83%9D%EC%84%A0%EC%B0%9C%EB%B3%B8%EC%A0%90" target="_blank" rel="noopener">길찾기</a>
+          <a class="go" href="#menu">메뉴 보기</a>
+        </div>
       </div>
     </div>
   </section>
 
+  <section class="trust" aria-label="다녀간 분들">
+    <div class="wrap">
+      <a class="t" href="https://map.naver.com/p/search/%EB%8C%80%ED%8F%AC%ED%95%AD%EC%83%9D%EC%84%A0%EC%B0%9C%EB%B3%B8%EC%A0%90" target="_blank" rel="noopener"><b>1,400건+</b><span>네이버 블로그 후기<br><u>후기 보러 가기</u></span></a>
+      <a class="t" href="#hall"><b>삼성썬더스</b><span>농구단 다녀간 집<br><u>매장 사진 보기</u></span></a>
+      <a class="t" href="#hall"><b>사인볼 벽</b><span>선수 사인볼 가득<br><u>구경하러 오세요</u></span></a>
+    </div>
+  </section>
   <section class="walk" aria-labelledby="walk-h">
     <div class="wrap">
       <div class="head">
-        <p class="eyebrow">A Taste of the Harbour</p>
-        <h2 id="walk-h">한 상 위의 대포항</h2>
+        <p class="eyebrow">What to Order</p>
+        <h2 id="walk-h">사진 보고 고르세요</h2>
+        <p class="lead">찜은 소(2인) · 중(3인) · 대(4인). 모든 메뉴 포장됩니다.</p>
       </div>
       <div class="grid">
-        <figure class="photo wide"><img src="img/jjim-table.jpg" alt="무와 생선이 담긴 생선모듬찜 한 상" loading="lazy"><figcaption><b>위</b>양념 밴 무까지 맛있는 생선모듬찜 한 상</figcaption></figure>
-        <figure class="photo"><img src="img/jjim-closeup.jpg" alt="가오리찜 속살 클로즈업" loading="lazy"><figcaption><b>위</b>결대로 찢어지는 가오리 살</figcaption></figure>
-        <figure class="photo"><img src="img/gui.jpg" alt="철판에 담긴 모듬생선구이" loading="lazy"><figcaption><b>위</b>뜨거운 무쇠 철판의 모듬생선구이</figcaption></figure>
-        <figure class="photo"><img src="img/squid-sundae.jpg" alt="바삭하게 지진 누룽지 오징어순대" loading="lazy"><figcaption><b>위</b>겉은 바삭, 속은 촉촉한 누룽지 오징어순대</figcaption></figure>
-        <figure class="photo"><img src="img/abai-sundae.jpg" alt="고추 장아찌를 곁들인 아바이순대" loading="lazy"><figcaption><b>위</b>실향민이 전한 속초 아바이순대</figcaption></figure>
+        <a class="dish wide" href="/sokcho-gaori-jjim/"><img src="img/gaori-jjim.jpg" alt="양념을 듬뿍 올린 가오리찜" loading="lazy"><span class="tag">대표</span><b>가오리찜</b><span>쫄깃한 살, 오도독한 연골. 가장 많이 찾는 메뉴 · 소·중·대</span></a>
+        <figure class="dish"><img src="img/jjim-table.jpg" alt="무와 생선이 담긴 생선모듬찜 한 상" loading="lazy"><b>생선모듬찜</b><span>여러 생선을 한 냄비에 · 소·중·대</span></figure>
+        <a class="dish" href="/sokcho-saengseon-gui/"><img src="img/gui.jpg" alt="철판에 담긴 모듬생선구이" loading="lazy"><span class="tag mild">안 매워요</span><b>모듬생선구이</b><span>무쇠 철판에 노릇하게, 아이와 함께 · 1판</span></a>
+        <a class="dish" href="/sokcho-nurungji-squid-sundae/"><img src="img/squid-sundae.jpg" alt="바삭하게 지진 누룽지 오징어순대" loading="lazy"><b>누룽지 오징어순대</b><span>겉은 바삭, 속은 촉촉 · 17,000원</span></a>
+        <figure class="dish"><img src="img/abai-sundae.jpg" alt="고추 장아찌를 곁들인 아바이순대" loading="lazy"><b>속초 아바이순대</b><span>고추 장아찌를 곁들여 · 1접시</span></figure>
       </div>
+      <p class="more-cta"><a class="go call" href="tel:050713644060">전화로 포장 주문하기</a></p>
     </div>
   </section>
-
   <section class="menu-sec" id="menu">
     <div class="wrap">
       <div class="card"><div class="card-in">
@@ -275,9 +327,7 @@ footer span{margin:0 8px;display:inline-block}
       </div></div>
     </div>
   </section>
-
   <div class="wrap" style="padding-top:56px;padding-bottom:56px"><div id="order-helper"></div></div>
-
   <section class="sig">
     <div class="wrap">
       <figure class="photo"><img src="img/jjim-closeup.jpg" alt="가오리찜의 하얀 속살 클로즈업, 깨와 대파가 올라간 양념" loading="lazy"><figcaption><b>위</b>대포항생선찜본점의 가오리찜</figcaption></figure>
@@ -289,7 +339,6 @@ footer span{margin:0 8px;display:inline-block}
       </div>
     </div>
   </section>
-
   <section class="hall" id="hall">
     <div class="wrap">
       <div class="head">
@@ -312,7 +361,19 @@ footer span{margin:0 8px;display:inline-block}
       </div>
     </div>
   </section>
-
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <div class="head"><p class="eyebrow">Good to Know</p><h2>오기 전에 많이 묻는 것</h2></div>
+      <details class="qa"><summary>주차는 어디에 하나요?</summary><p>대포항 공영주차장에 세우시면 됩니다. 주차 후 걸어서 몇 분 거리예요.</p></details>
+      <details class="qa"><summary>포장도 되나요?</summary><p>찜, 구이, 순대 모두 포장됩니다. 전화로 미리 주문해 두시면 바로 가져가실 수 있어요.</p></details>
+      <details class="qa"><summary>찜은 몇 인분인가요?</summary><p>소는 2인, 중은 3인, 대는 4인 기준입니다.</p></details>
+      <details class="qa"><summary>반려동물과 함께 가도 되나요?</summary><p>네, 반려동물 동반 가능합니다. 출입문에 환영 스티커도 붙어 있어요.</p></details>
+      <details class="qa"><summary>아이와 가기 괜찮나요?</summary><p>아기 의자를 여러 개 준비해 두었고, 맵지 않은 모듬생선구이가 있어 아이와 함께 드시기 좋아요.</p></details>
+      <details class="qa"><summary>단체로 가도 되나요?</summary><p>칸막이가 있는 넓은 홀이라 가족, 모임 식사도 편합니다. 인원이 많으면 미리 전화 주세요.</p></details>
+      <details class="qa"><summary>쉬는 날은 언제인가요?</summary><p>매주 수요일 정기휴무이고, 다른 날은 10:00부터 21:00까지 영업합니다.</p></details>
+      <p class="more-cta"><a class="go call" href="tel:050713644060">궁금한 건 전화로 물어보세요</a></p>
+    </div>
+  </section>
   <section class="visit" id="visit">
     <div class="wrap">
       <div>
@@ -330,6 +391,28 @@ footer span{margin:0 8px;display:inline-block}
         </div>
       </div>
       <figure class="photo"><img src="img/storefront.jpg" alt="밤에 불이 켜진 속초 대포항 생선찜 구이 간판과 매장 입구" loading="lazy"><figcaption><b>위</b>밤에도 환한 대포항 네온 간판</figcaption></figure>
+    </div>
+  </section>
+  <section class="open">
+    <div class="wrap">
+      <p class="cap">Sokcho · Daepohang Harbour</p>
+      <blockquote>항구를 한 바퀴 걷고 오세요.<br>그사이 찜 냄비가 보글보글 끓고 있을 거예요.</blockquote>
+      <p class="h1like">대포항생선찜<small>Steamed fish by the harbour, Sokcho</small></p>
+      <div class="orn" aria-hidden="true"><i>◆</i></div>
+    </div>
+  </section>
+  <section class="letter" id="story">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Our Story</p>
+        <h2>대포항에 보내는<br>편지 한 장</h2>
+      </div>
+      <div class="body">
+        <p>속초 남쪽 끝, 고깃배가 드나들고 튀김 냄새가 골목을 채우는 대포항. 회 한 접시도 좋지만, 바닷바람을 맞고 나면 따뜻한 밥 한 공기가 생각나기 마련입니다.</p>
+        <p>그래서 우리는 생선을 찝니다. 두툼한 무를 깔고, 그날 들어온 생선을 올리고, 고춧가루와 마늘 양념을 끼얹어 천천히. 양념이 졸아들며 무와 생선살 속까지 배어들면, 밥 위에 한 점 올려 드세요.</p>
+        <p>벽에는 다녀간 선수들의 사인볼이, 테이블 옆에는 아기 의자가, 문에는 반려동물을 환영한다는 스티커가 붙어 있습니다. 누구와 오셔도 편한 항구 앞 밥집이고 싶습니다.</p>
+        <p class="sign">대포항생선찜본점 드림</p>
+      </div>
     </div>
   </section>
   <section id="guide" class="alt">
