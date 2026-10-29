@@ -346,9 +346,14 @@ def page(p):
       <a class="q-call" href="tel:050713644060"><b>전화로 자리·포장 문의</b><span>0507-1364-4060</span></a>
       <a class="q-map" href="{NAVER_PLACE}" target="_blank" rel="noopener">길찾기</a>
     </div>
-    <p class="q-note">대포항길 10 · 대포항 공영주차장 · 매주 수요일 휴무 · 전 메뉴 포장</p>
+    <ul class="facts" aria-label="한눈에 보기"><li><b>매일 10:00~21:00</b> 수요일 휴무</li><li>대포항길 10</li><li>대포항 공영주차장</li><li>전 메뉴 포장</li><li>반려동물 동반</li><li>아기 의자</li></ul>
   </div>
   <figure class="photo"><img src="/img/{p['img']}" alt="{p['alt']}"><figcaption>대포항생선찜본점 · {p['kw']}</figcaption></figure>
+  <div class="trust" aria-label="다녀간 분들">
+    <a class="t" href="{NAVER_PLACE}" target="_blank" rel="noopener"><b>{BLOG_REVIEWS}건+</b><span>네이버 블로그 후기<br><u>후기 보러 가기</u></span></a>
+    <a class="t" href="/#hall"><b>삼성썬더스</b><span>농구단 다녀간 집<br><u>매장 사진 보기</u></span></a>
+    <a class="t" href="/#photos"><b>소·중·대</b><span>2인 · 3인 · 4인<br><u>메뉴 사진 보기</u></span></a>
+  </div>
 {taste(p)}
   <article>
 {p['body']}
@@ -446,7 +451,15 @@ CSS += """
 .quick .q-call{flex:1;background:var(--chili);color:#fff;padding:8px 14px}
 .quick .q-call b{font-size:1.05rem}.quick .q-call span{font-size:.85rem;font-weight:500;opacity:.9;font-variant-numeric:tabular-nums}
 .quick .q-map{padding:8px 18px;color:var(--chili);background:transparent}
-.q-note{margin:10px 0 0;font-size:.82rem;color:var(--muted)}
+.facts{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:14px auto 0;padding:0;max-width:560px}
+.facts li{border:1px solid var(--line);background:var(--paper2,#e9dcc3);padding:2px 10px;font-size:.84rem;line-height:1.6}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);background:var(--paper2,#e9dcc3);margin:14px 0 0}
+.trust .t{display:block;text-align:center;padding:14px 4px;text-decoration:none;color:inherit;border-right:1px solid var(--line)}
+.trust .t:last-child{border-right:0}
+.trust b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(1.05rem,3.6vw,1.4rem);color:var(--chili)}
+.trust span{display:block;font-size:.8rem;color:var(--muted);line-height:1.5;margin-top:2px}
+.trust u{text-decoration:none;color:var(--ink,#221d19);font-weight:700;font-size:.76rem}
+@media (max-width:480px){.trust span{font-size:.74rem;letter-spacing:-.02em}.trust u{font-size:.72rem}}
 .reviews{margin-top:40px;padding:24px 20px;background:var(--surface);border:1px solid var(--line);text-align:center}
 article .reviews h2{margin:6px 0 0;padding:0;border:0;font-size:clamp(1.2rem,3.6vw,1.45rem)}
 .rv-badge{display:inline-block;margin:0;font-size:.8rem;font-weight:700;color:var(--chili);border:1px solid var(--chili);padding:2px 10px}
