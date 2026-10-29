@@ -156,6 +156,10 @@ h2{font-size:clamp(1.7rem,4.4vw,2.6rem)}
 .hero h1 small{display:block;font-family:var(--body);font-weight:700;font-size:clamp(1rem,3.6vw,1.2rem);color:var(--red);letter-spacing:0;margin-top:8px}
 .hero .cap{margin:0}
 .where{margin:8px 0 0;color:var(--soft);font-size:.95rem}
+.rating{display:flex;align-items:center;gap:6px;margin:10px 0 0;font-size:.92rem;color:var(--soft);text-decoration:none}
+.rating b{color:var(--ink);font-size:1.02rem}
+.stars{--p:calc(var(--r) / 5 * 100%);display:inline-block;font-size:1.1rem;letter-spacing:1px;line-height:1;background:linear-gradient(90deg,#e0a526 var(--p),#cbbd9f var(--p));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stars::before{content:"★★★★★"}
 .facts{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 0;padding:0}
 .facts li{border:1px solid var(--rule);background:var(--paper2);padding:3px 10px;font-size:.86rem;line-height:1.6}
 .facts li b{font-weight:700}
@@ -249,6 +253,7 @@ footer span{margin:0 8px;display:inline-block}
         <p class="cap">Sokcho · Daepohang Harbour</p>
         <h1>대포항생선찜본점<small>속초 대포항 생선찜 · 가오리찜 · 생선구이</small></h1>
         <p class="where">대포항 안쪽 상가 1층, 노란·분홍 네온 간판</p>
+        <a class="rating" href="https://map.naver.com/p/search/%EB%8C%80%ED%8F%AC%ED%95%AD%EC%83%9D%EC%84%A0%EC%B0%9C%EB%B3%B8%EC%A0%90" target="_blank" rel="noopener"><span class="stars" style="--r:4.33" aria-hidden="true"></span><b>4.33</b> 네이버 별점 · 리뷰 1,714개</a>
         <ul class="facts" aria-label="한눈에 보기">
           <li><b>매일 10:00~21:00</b> 수요일 휴무</li>
           <li>전 메뉴 포장</li>
@@ -267,9 +272,9 @@ footer span{margin:0 8px;display:inline-block}
 
   <section class="trust" aria-label="다녀간 분들">
     <div class="wrap">
-      <a class="t" href="https://map.naver.com/p/search/%EB%8C%80%ED%8F%AC%ED%95%AD%EC%83%9D%EC%84%A0%EC%B0%9C%EB%B3%B8%EC%A0%90" target="_blank" rel="noopener"><b>1,400건+</b><span>네이버 블로그 후기<br><u>후기 보러 가기</u></span></a>
+      <a class="t" href="https://map.naver.com/p/search/%EB%8C%80%ED%8F%AC%ED%95%AD%EC%83%9D%EC%84%A0%EC%B0%9C%EB%B3%B8%EC%A0%90" target="_blank" rel="noopener"><b>★ 4.33</b><span>네이버 별점<br><u>리뷰 보러 가기</u></span></a>
       <a class="t" href="#hall"><b>삼성썬더스</b><span>농구단 다녀간 집<br><u>매장 사진 보기</u></span></a>
-      <a class="t" href="#hall"><b>사인볼 벽</b><span>선수 사인볼 가득<br><u>구경하러 오세요</u></span></a>
+      <a class="t" href="https://map.naver.com/p/search/%EB%8C%80%ED%8F%AC%ED%95%AD%EC%83%9D%EC%84%A0%EC%B0%9C%EB%B3%B8%EC%A0%90" target="_blank" rel="noopener"><b>1,400건+</b><span>네이버 블로그 후기<br><u>후기 보러 가기</u></span></a>
     </div>
   </section>
   <section class="walk" id="photos" aria-labelledby="walk-h">

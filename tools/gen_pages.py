@@ -283,7 +283,7 @@ __REVIEWS__
     </div>
   </section>"""
 
-from reviews import REVIEWS, BLOG_REVIEWS, NAVER_PLACE
+from reviews import REVIEWS, BLOG_REVIEWS, NAVER_PLACE, NAVER_RATING, NAVER_REVIEW_COUNT
 
 def reviews_html():
     cards = "".join(f'<li><p>“{t}”</p><span>{w}{" · "+d if d else ""}</span></li>' for t,w,d in REVIEWS[:6])
@@ -342,6 +342,7 @@ def page(p):
     <p class="eyebrow">{p['kw']}</p>
     <h1>{p['h1']}</h1>
     <p class="lede">{p['lede']}</p>
+    <a class="rating" href="{NAVER_PLACE}" target="_blank" rel="noopener"><span class="stars" style="--r:{NAVER_RATING}" aria-hidden="true"></span><b>{NAVER_RATING}</b> 네이버 별점 · 리뷰 {NAVER_REVIEW_COUNT}개</a>
     <div class="quick">
       <a class="q-call" href="tel:050713644060"><b>전화로 자리·포장 문의</b><span>0507-1364-4060</span></a>
       <a class="q-map" href="{NAVER_PLACE}" target="_blank" rel="noopener">길찾기</a>
@@ -350,7 +351,7 @@ def page(p):
   </div>
   <figure class="photo"><img src="/img/{p['img']}" alt="{p['alt']}"><figcaption>대포항생선찜본점 · {p['kw']}</figcaption></figure>
   <div class="trust" aria-label="다녀간 분들">
-    <a class="t" href="{NAVER_PLACE}" target="_blank" rel="noopener"><b>{BLOG_REVIEWS}건+</b><span>네이버 블로그 후기<br><u>후기 보러 가기</u></span></a>
+    <a class="t" href="{NAVER_PLACE}" target="_blank" rel="noopener"><b>★ {NAVER_RATING}</b><span>네이버 별점<br><u>리뷰 보러 가기</u></span></a>
     <a class="t" href="/#hall"><b>삼성썬더스</b><span>농구단 다녀간 집<br><u>매장 사진 보기</u></span></a>
     <a class="t" href="/#photos"><b>소·중·대</b><span>2인 · 3인 · 4인<br><u>메뉴 사진 보기</u></span></a>
   </div>
@@ -451,6 +452,10 @@ CSS += """
 .quick .q-call{flex:1;background:var(--chili);color:#fff;padding:8px 14px}
 .quick .q-call b{font-size:1.05rem}.quick .q-call span{font-size:.85rem;font-weight:500;opacity:.9;font-variant-numeric:tabular-nums}
 .quick .q-map{padding:8px 18px;color:var(--chili);background:transparent}
+.rating{display:inline-flex;align-items:center;gap:6px;margin:12px 0 0;font-size:.9rem;color:var(--muted);text-decoration:none}
+.rating b{color:var(--ink,#221d19);font-size:1rem}
+.stars{--p:calc(var(--r) / 5 * 100%);display:inline-block;font-size:1.05rem;letter-spacing:1px;line-height:1;background:linear-gradient(90deg,#e0a526 var(--p),#cbbd9f var(--p));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stars::before{content:"★★★★★"}
 .facts{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:14px auto 0;padding:0;max-width:560px}
 .facts li{border:1px solid var(--line);background:var(--paper2,#e9dcc3);padding:2px 10px;font-size:.84rem;line-height:1.6}
 .trust{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);background:var(--paper2,#e9dcc3);margin:14px 0 0}
