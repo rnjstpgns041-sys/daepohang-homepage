@@ -295,6 +295,17 @@ def reviews_html():
     <div class="cta"><a class="btn btn-rv" href="{NAVER_PLACE}" target="_blank" rel="noopener">네이버 리뷰 전체 보기</a><a class="btn btn-rv-call" href="tel:050713644060">지금 전화하기</a></div>
   </section>"""
 
+SIZES = {"storefront.jpg":(1400,664),"hall.jpg":(1400,1050),"ball-wall.jpg":(1400,664),"jjim-table.jpg":(1050,1400),"gui.jpg":(1050,1400)}
+def pics(p):
+    # A row of distinct photos (outside, hall, wall, a dish) so Naver has several images to show with the result.
+    dish = "gui.jpg" if p["img"] == "jjim-table.jpg" else "jjim-table.jpg"
+    dish_alt = "모듬생선구이 철판" if dish == "gui.jpg" else "생선찜 한 상"
+    items = [("storefront.jpg", f"{p['kw']} 대포항생선찜본점 네온 간판 매장 외관"),
+             ("hall.jpg", f"{p['kw']} 대포항생선찜본점 넓은 홀 내부"),
+             ("ball-wall.jpg", "대포항생선찜본점 선수 사인볼 벽"),
+             (dish, f"대포항생선찜본점 {dish_alt}")]
+    imgs = "".join(f'<img src="/img/{f}" alt="{a}" width="{SIZES[f][0]}" height="{SIZES[f][1]}">' for f, a in items)
+    return f'  <div class="pics" aria-label="매장 사진">{imgs}</div>'
 def page(p):
     url = f"{BASE}/{p['slug']}/"
     same=[o for o in PAGES if o is not p and o.get("cat")==p.get("cat")]
@@ -355,6 +366,7 @@ def page(p):
     <a class="t" href="/#hall"><b>삼성썬더스</b><span>농구단 다녀간 집<br><u>매장 사진 보기</u></span></a>
     <a class="t" href="/#photos"><b>소·중·대</b><span>2인 · 3인 · 4인<br><u>메뉴 사진 보기</u></span></a>
   </div>
+{pics(p)}
 {taste(p)}
   <article>
 {p['body']}
@@ -460,6 +472,8 @@ CSS += """
 .rating b{color:var(--ink,#221d19);font-size:1rem}
 .stars{--p:calc(var(--r) / 5 * 100%);display:inline-block;font-size:1.05rem;letter-spacing:1px;line-height:1;background:linear-gradient(90deg,#e0a526 var(--p),#cbbd9f var(--p));-webkit-background-clip:text;background-clip:text;color:transparent}
 .stars::before{content:"★★★★★"}
+.pics{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0 0}
+.pics img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:10px}
 .facts{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:14px auto 0;padding:0;max-width:560px}
 .facts li{border:1px solid var(--line);background:var(--paper2,#e9dcc3);padding:2px 10px;font-size:.84rem;line-height:1.6}
 .trust{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);background:var(--paper2,#e9dcc3);margin:14px 0 0}
