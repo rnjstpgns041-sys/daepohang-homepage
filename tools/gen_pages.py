@@ -418,6 +418,7 @@ from pages17 import P as EXTRA17
 from pages18 import P as EXTRA18
 from pages19 import P as EXTRA19
 from pages20 import P as EXTRA20
+from pages21 import P as EXTRA21
 NEW = {e['slug'] for e in EXTRA3}
 NEW4 = {e['slug'] for e in EXTRA4}
 NEW5 = {e['slug'] for e in EXTRA5}
@@ -435,7 +436,8 @@ NEW17 = {e['slug'] for e in EXTRA17}
 NEW18 = {e['slug'] for e in EXTRA18}
 NEW19 = {e['slug'] for e in EXTRA19}
 NEW20 = {e['slug'] for e in EXTRA20}
-EXTRA = EXTRA + EXTRA3 + EXTRA4 + EXTRA5 + EXTRA6 + EXTRA7 + EXTRA8 + EXTRA9 + EXTRA10 + EXTRA11 + EXTRA12 + EXTRA13 + EXTRA14 + EXTRA15 + EXTRA16 + EXTRA17 + EXTRA18 + EXTRA19 + EXTRA20
+NEW21 = {e['slug'] for e in EXTRA21}
+EXTRA = EXTRA + EXTRA3 + EXTRA4 + EXTRA5 + EXTRA6 + EXTRA7 + EXTRA8 + EXTRA9 + EXTRA10 + EXTRA11 + EXTRA12 + EXTRA13 + EXTRA14 + EXTRA15 + EXTRA16 + EXTRA17 + EXTRA18 + EXTRA19 + EXTRA20 + EXTRA21
 for p in PAGES: p.setdefault("cat","대표")
 for e in EXTRA:
     body = "".join(f"\n<h2>{h}</h2>\n{html}" for h,html in e["sections"])
@@ -496,7 +498,7 @@ html=page(gp).replace('<nav class="more"','<nav hidden class="more"')
 open(os.path.join(ROOT,"guide","index.html"),"w",encoding="utf-8").write(html)
 urls = [BASE+"/", BASE+"/guide/"] + [f"{BASE}/{p['slug']}/" for p in PAGES]
 sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + \
-     "".join(f"  <url><loc>{u}</loc><lastmod>{'2026-10-29' if u.rstrip('/').rsplit('/',1)[-1] in NEW20 else '2026-10-28' if u.rstrip('/').rsplit('/',1)[-1] in NEW19 else '2026-10-27' if u.rstrip('/').rsplit('/',1)[-1] in NEW18 else '2026-10-26' if u.rstrip('/').rsplit('/',1)[-1] in NEW17 else '2026-10-25' if u.rstrip('/').rsplit('/',1)[-1] in NEW16 else '2026-10-24' if u.rstrip('/').rsplit('/',1)[-1] in NEW15 else '2026-10-22' if u.rstrip('/').rsplit('/',1)[-1] in NEW14 else '2026-10-21' if u.rstrip('/').rsplit('/',1)[-1] in NEW13 else '2026-10-20' if u.rstrip('/').rsplit('/',1)[-1] in NEW12 else '2026-10-19' if u.rstrip('/').rsplit('/',1)[-1] in NEW10 else '2026-10-17' if u.rstrip('/').rsplit('/',1)[-1] in NEW9 else '2026-10-16' if u.rstrip('/').rsplit('/',1)[-1] in NEW8 else '2026-10-15' if u.rstrip('/').rsplit('/',1)[-1] in NEW7 else '2026-10-14' if u.rstrip('/').rsplit('/',1)[-1] in NEW6 else '2026-10-13' if u.rstrip('/').rsplit('/',1)[-1] in NEW5 else '2026-10-12' if u.rstrip('/').rsplit('/',1)[-1] in NEW4 else '2026-10-11' if u.rstrip('/').rsplit('/',1)[-1] in NEW else '2026-10-06'}</lastmod></url>\n" for u in urls) + "</urlset>\n"
+     "".join(f"  <url><loc>{u}</loc><lastmod>{'2026-10-30' if u.rstrip('/').rsplit('/',1)[-1] in NEW21 else '2026-10-29' if u.rstrip('/').rsplit('/',1)[-1] in NEW20 else '2026-10-28' if u.rstrip('/').rsplit('/',1)[-1] in NEW19 else '2026-10-27' if u.rstrip('/').rsplit('/',1)[-1] in NEW18 else '2026-10-26' if u.rstrip('/').rsplit('/',1)[-1] in NEW17 else '2026-10-25' if u.rstrip('/').rsplit('/',1)[-1] in NEW16 else '2026-10-24' if u.rstrip('/').rsplit('/',1)[-1] in NEW15 else '2026-10-22' if u.rstrip('/').rsplit('/',1)[-1] in NEW14 else '2026-10-21' if u.rstrip('/').rsplit('/',1)[-1] in NEW13 else '2026-10-20' if u.rstrip('/').rsplit('/',1)[-1] in NEW12 else '2026-10-19' if u.rstrip('/').rsplit('/',1)[-1] in NEW10 else '2026-10-17' if u.rstrip('/').rsplit('/',1)[-1] in NEW9 else '2026-10-16' if u.rstrip('/').rsplit('/',1)[-1] in NEW8 else '2026-10-15' if u.rstrip('/').rsplit('/',1)[-1] in NEW7 else '2026-10-14' if u.rstrip('/').rsplit('/',1)[-1] in NEW6 else '2026-10-13' if u.rstrip('/').rsplit('/',1)[-1] in NEW5 else '2026-10-12' if u.rstrip('/').rsplit('/',1)[-1] in NEW4 else '2026-10-11' if u.rstrip('/').rsplit('/',1)[-1] in NEW else '2026-10-06'}</lastmod></url>\n" for u in urls) + "</urlset>\n"
 open(os.path.join(ROOT,"sitemap.xml"),"w",encoding="utf-8").write(sm)
 # page names for the owner-only stats page
 os.makedirs(os.path.join(ROOT,"stats"),exist_ok=True)
